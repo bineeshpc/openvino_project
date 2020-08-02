@@ -11,13 +11,27 @@
 # 2. Close the source file
 
 
+machine_hostname=$(hostname)
+cloud=ip-172-31-39-53
+mymachine=ubuntu18
+
+if [ $machine_hostname = $cloud ]
+then
+    echo "cloud"
+    openvino_dir=/opt/intel/openvino
+else
+    echo "mymachine"
+    openvino_dir=$HOME/agile/workspace/openvino
+fi
+
+
 workspace=$HOME/agile/workspace
 
-workshop_directory=$workpace/smart_video_workshop
+workshop_directory=$workspace/smart_video_workshop
 export SV=$workshop_directory/smart-video-workshop/
 
 # 3. Source your environmental variables
-source $workspace/openvino/scripts/setupvars/setupvars.sh
+# Already done on bashrc
 # 4. Download the test video file to the object-detection folder.
 # Put the below link in your favorite browser.
 
@@ -29,7 +43,15 @@ source $workspace/openvino/scripts/setupvars/setupvars.sh
 # The below command runs the application
 # cd $workspace/open_model_zoo/demos/python_demos/object_detection_demo_ssd_async
 
-python3 $workspace/open_model_zoo/demos/python_demos/object_detection_demo_ssd_async/object_detection_demo_ssd_async.py \
+echo "here"
+echo $SV
+ls $SV
+ls $SV/object-detection
+# cp $HOME/Downloads/Cars-1900.mp4 $SV/object-detection/Cars-1900.mp4
+ls $SV/object-detection/Cars-1900.mp4
+ls $SV/object-detection/mobilenet-ssd/FP32/mobilenet-ssd.xml
+ 
+python3 $openvino_dir/deployment_tools/open_model_zoo/demos/python_demos/object_detection_demo_ssd_async/object_detection_demo_ssd_async.py \
 -i $SV/object-detection/Cars-1900.mp4 \
 -m $SV/object-detection/mobilenet-ssd/FP32/mobilenet-ssd.xml 
 # Note: If you get an error related to "undefined reference to 'google::FlagRegisterer...", try uninstalling libgflags-dev: sudo apt-get remove libgflags-dev

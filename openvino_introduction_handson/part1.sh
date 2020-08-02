@@ -1,19 +1,37 @@
 #1. Create a directory to store IR files
+
+machine_hostname=$(hostname)
+cloud=ip-172-31-39-53
+mymachine=ubuntu18
+
+if [ $machine_hostname = $cloud ]
+then
+    echo "cloud"
+    openvino_dir=/opt/intel/openvino
+else
+    echo "mymachine"
+    openvino_dir=$HOME/agile/workspace/openvino
+fi
+
+
+
 workpace=$HOME/agile/workspace
 workshop_directory=$workpace/smart_video_workshop
 export SV=$workshop_directory/smart-video-workshop/
+
 cd $SV/object-detection/
 mkdir -p mobilenet-ssd/FP32 
 #2. Navigate to the Intel® Distribution of OpenVINO™ toolkit install directory
-openvino_dir=$HOME/agile/workspace/openvino
-cd $openvino_dir/model-optimizer
-pwd
-ls $workpace/open_model_zoo/tools/downloader/public/mobilenet-ssd/mobilenet-ssd.caffemodel
+ls $openvino_dir/deployment_tools/open_model_zoo/tools/downloader/
+
+cd $openvino_dir/deployment_tools/model_optimizer
+ls $openvino_dir/deployment_tools/open_model_zoo/tools/downloader/public/mobilenet-ssd/mobilenet-ssd.caffemodel
+
 
 python3 mo_caffe.py -h
 #3. Run the Model Optimizer on the pretrained Caffe* model. This step generates one .xml file and one .bin file and place both files in the tutorial samples directory (located here: /object-detection/)
 python3 mo_caffe.py \
---input_model $workpace/open_model_zoo/tools/downloader/public/mobilenet-ssd/mobilenet-ssd.caffemodel \
+--input_model $openvino_dir/deployment_tools/open_model_zoo/tools/downloader/public/mobilenet-ssd/mobilenet-ssd.caffemodel \
 --output_dir $SV/object-detection/mobilenet-ssd/FP32 \
 --scale 256 \
 --mean_values [127,127,127]
