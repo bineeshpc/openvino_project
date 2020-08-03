@@ -1,0 +1,31 @@
+# https://github.com/intel-iot-devkit/smart-video-workshop/blob/master/advanced-video-analytics/multiple_models.md
+# Part 1. Chaining models: Use mutiple models in an application
+
+The Intel® Distribution of OpenVINO™ toolkit package includes security barrier sample which uses 3 models to detect cars, their number plates, color and number plate attributes from the input video or image of the cars. The sample demo script is provided in the Intel® Distribution of OpenVINO™ toolkit package to run the sample.
+
+export SV=/opt/intel/workshop/smart-video-workshop/
+source /opt/intel/openvino/bin/setupvars.sh
+cd $HOME/inference_engine_demos_build/intel64/Release
+
+cd /opt/intel/openvino/deployment_tools/demo/
+sudo ./demo_security_barrier_camera.sh
+
+# gedit demo_security_barrier_camera.sh
+
+
+# Part 2. Use multiple models on different hardware
+
+# Do make on the below directory to generate the interactive face_detection_demo
+
+/home/ubuntu/inference_engine_demos_build/interactive_face_detection_demo
+make
+
+source /opt/intel/openvino/bin/setupvars.s
+h
+cd $HOME/inference_engine_demos_build/intel64/Release
+ ./interactive_face_detection_demo -h
+
+We cannot do interactive face detection demo on the remote vm.
+
+The rest of the handson is about interactive face detection on multiple devices GPU, stick etc
+which we cannot do.

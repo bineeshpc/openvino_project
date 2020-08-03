@@ -1,0 +1,130 @@
+# https://github.com/intel-iot-devkit/smart-video-workshop/tree/master/optimization-tools-and-techniques
+
+
+export SV=/opt/intel/workshop/smart-video-workshop/
+source /opt/intel/openvino/bin/setupvars.sh
+cd $SV/object-detection/Python
+python3 tutorial1.py -i $SV/object-detection/Cars\ -\ 1900.mp4 -m $SV/object-detection/mobilenet-ssd/FP32/mobilenet-ssd.xml
+
+
+ubuntu@ip-172-31-39-53:~/agile/workspace/smart_video_workshop/smart-video-workshop/object-detection/Python$ python3 tutorial1.py -i $SV/object-detection/Cars-1900.mp4 -m $SV/object-detection/mobilenet-ssd/FP32/mobilenet-ssd.xml
+[ INFO ] Initializing plugin for CPU device...
+tutorial1.py:73: DeprecationWarning: IEPlugin class is deprecated. Please use IECore class instead.
+  plugin = IEPlugin(device=args.device, plugin_dirs=args.plugin_dir)
+[ INFO ] Reading IR...
+tutorial1.py:80: DeprecationWarning: Reading network using constructor is deprecated. Please, use IECore.read_network() method instead
+  net = IENetwork(model=model_xml, weights=model_bin)
+tutorial1.py:99: DeprecationWarning: 'inputs' property of IENetwork class is deprecated. To access DataPtrs user need to use 'input_data' property of InputInfoPtr objects which can be accessed by 'input_info' property.
+  assert len(net.inputs.keys()) == 1, "Demo supports only single input topologies"
+[ INFO ] Loading IR to the plugin...
+inputdims= 300 300 3 1
+outputdims= 7 100 1 1
+SSD Mode
+[ INFO ] Starting inference in async mode...
+tutorial1.py:196: DeprecationWarning: 'outputs' property of InferRequest is deprecated. Please instead use 'output_blobs' property.
+  res = exec_net.requests[cur_request_id].outputs[out_blob]
+framenum:256
+
+Preprocess: 11.71 ms/frame
+Inference: 22.69 ms/frame 
+Postprocess: 0.55 ms/frame
+
+
+# Change the batch size to 2 and run the object-detection example for new batch size
+
+buntu@ip-172-31-39-53:~/agile/workspace/smart_video_workshop/smart-video-workshop/object-detection/Python$ python3 tutorial1.py -i $SV/object-detection/Cars-1900.mp4 -m $SV/object-detection/mobilenet-ssd/FP32/mobilenet-ssd.xml -b 2
+[ INFO ] Initializing plugin for CPU device...
+tutorial1.py:73: DeprecationWarning: IEPlugin class is deprecated. Please use IECore class instead.
+  plugin = IEPlugin(device=args.device, plugin_dirs=args.plugin_dir)
+[ INFO ] Reading IR...
+tutorial1.py:80: DeprecationWarning: Reading network using constructor is deprecated. Please, use IECore.read_network() method instead
+  net = IENetwork(model=model_xml, weights=model_bin)
+tutorial1.py:99: DeprecationWarning: 'inputs' property of IENetwork class is deprecated. To access DataPtrs user need to use 'input_data' property of InputInfoPtr objects which can be accessed by 'input_info' property.
+  assert len(net.inputs.keys()) == 1, "Demo supports only single input topologies"
+[ INFO ] Loading IR to the plugin...
+inputdims= 300 300 3 2
+outputdims= 7 100 1 2
+SSD Mode
+[ INFO ] Starting inference in async mode...
+tutorial1.py:196: DeprecationWarning: 'outputs' property of InferRequest is deprecated. Please instead use 'output_blobs' property.
+  res = exec_net.requests[cur_request_id].outputs[out_blob]
+framenum:256
+
+Preprocess: 19.01 ms/frame
+Inference: 13.47 ms/frame 
+Postprocess: 0.57 ms/frame
+ubuntu@ip-172-31-39-53:~/ag
+
+
+ubuntu@ip-172-31-39-53:~/agile/workspace/smart_video_workshop/smart-video-workshop/object-detection/Python$ python3 tutorial1.py -i $SV/object-detection/Cars-1900.mp4 -m $SV/object-detection/mobilenet-ssd/FP32/mobilenet-ssd.xml -b 8
+[ INFO ] Initializing plugin for CPU device...
+tutorial1.py:73: DeprecationWarning: IEPlugin class is deprecated. Please use IECore class instead.
+  plugin = IEPlugin(device=args.device, plugin_dirs=args.plugin_dir)
+[ INFO ] Reading IR...
+tutorial1.py:80: DeprecationWarning: Reading network using constructor is deprecated. Please, use IECore.read_network() method instead
+  net = IENetwork(model=model_xml, weights=model_bin)
+tutorial1.py:99: DeprecationWarning: 'inputs' property of IENetwork class is deprecated. To access DataPtrs user need to use 'input_data' property of InputInfoPtr objects which can be accessed by 'input_info' property.
+  assert len(net.inputs.keys()) == 1, "Demo supports only single input topologies"
+[ INFO ] Loading IR to the plugin...
+inputdims= 300 300 3 8
+outputdims= 7 100 1 8
+SSD Mode
+[ INFO ] Starting inference in async mode...
+tutorial1.py:196: DeprecationWarning: 'outputs' property of InferRequest is deprecated. Please instead use 'output_blobs' property.
+  res = exec_net.requests[cur_request_id].outputs[out_blob]
+framenum:256
+
+Preprocess: 20.55 ms/frame
+Inference: 12.97 ms/frame 
+Postprocess: 0.87 ms/frame
+ubuntu@ip-172-31-39-53:~/agile
+
+
+ubuntu@ip-172-31-39-53:~/agile/workspace/smart_video_workshop/smart-video-workshop/object-detection/Python$ python3 tutorial1.py -i $SV/object-detection/Cars-1900.mp4 -m $SV/object-detection/mobilenet-ssd/FP32/mobilenet-ssd.xml -b 32
+[ INFO ] Initializing plugin for CPU device...
+tutorial1.py:73: DeprecationWarning: IEPlugin class is deprecated. Please use IECore class instead.
+  plugin = IEPlugin(device=args.device, plugin_dirs=args.plugin_dir)
+[ INFO ] Reading IR...
+tutorial1.py:80: DeprecationWarning: Reading network using constructor is deprecated. Please, use IECore.read_network() method instead
+  net = IENetwork(model=model_xml, weights=model_bin)
+tutorial1.py:99: DeprecationWarning: 'inputs' property of IENetwork class is deprecated. To access DataPtrs user need to use 'input_data' property of InputInfoPtr objects which can be accessed by 'input_info' property.
+  assert len(net.inputs.keys()) == 1, "Demo supports only single input topologies"
+[ INFO ] Loading IR to the plugin...
+inputdims= 300 300 3 32
+outputdims= 7 100 1 32
+SSD Mode
+[ INFO ] Starting inference in async mode...
+tutorial1.py:196: DeprecationWarning: 'outputs' property of InferRequest is deprecated. Please instead use 'output_blobs' property.
+  res = exec_net.requests[cur_request_id].outputs[out_blob]
+framenum:256
+
+Preprocess: 19.60 ms/frame
+Inference: 16.79 ms/frame 
+Postprocess: 2.60 ms/frame
+ubuntu@ip-172-31-39-53:~/agile/wo
+
+
+cd $SV/object-detection
+mkdir -p SSD512/{FP16,FP32} 
+mkdir -p SSD300/{FP16,FP32}
+
+
+
+cd /opt/intel/openvino/deployment_tools/open_model_zoo/tools/downloader/public/ssd512/models/VGGNet/VOC0712Plus/SSD_512x512
+
+sudo mv VGG_VOC0712Plus_SSD_512x512_iter_240000.caffemodel ssd512.caffemodel
+
+sudo mv deploy.prototxt ssd512.prototxt
+
+cd /opt/intel/openvino/deployment_tools/open_model_zoo/tools/downloader/public/ssd300/models/VGGNet/VOC0712Plus/SSD_300x300_ft
+
+ sudo mv VGG_VOC0712Plus_SSD_300x300_ft_iter_160000.caffemodel ssd300.caffemodel
+
+sudo mv deploy.prototxt ssd300.prototxt
+
+
+Giving datatype option of
+
+--data_type FP16
+
+etc part skipped.
